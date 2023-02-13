@@ -25,10 +25,15 @@ def measurements_view(request):
 @csrf_exempt
 def measurement_view(request, pk):
     if request.method == 'GET':
-        measurement = vl.get_measurement(pk)
-        measurement_dto = serializers.serialize('json', measurement)
-        return HttpResponse(measurement_dto, 'application/json')
+        measurement_dto = vl.get_measurement(pk)
+        measurement = serializers.serialize('json', [measurement_dto,])
+        return HttpResponse(measurement, 'application/json')
+    
     if request.method == 'PUT':
         measurement_dto = vl.update_measurement(pk, json.loads(request.body))
         measurement = serializers.serialize('json', [measurement_dto,])
+        return HttpResponse(measurement, 'application/json')
+    if request.method == 'DELETE':
+        measurement_dto = vl.delete_measurement(pk)
+        measurement = serializers.serialize('json', [measurement_dto, ]) 
         return HttpResponse(measurement, 'application/json')

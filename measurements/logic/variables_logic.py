@@ -27,7 +27,7 @@ def create_measurement(var):
         measurement.save()
     return measurement
 
-def delete_measurement(var_pk):
-    measurement = Measurement.objects.get(pk=var_pk)
-    measurement.delete()
+def delete_measurement(var_pk): 
+    measurement = Measurement.objects.get(pk=var_pk) 
+    measurement.delete() 
     return measurement
